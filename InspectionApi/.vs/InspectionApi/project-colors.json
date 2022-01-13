@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "d257779f-c24b-4cc1-99fe-e2fbac85041c": {
+      "ProjectGuid": "d257779f-c24b-4cc1-99fe-e2fbac85041c",
+      "DisplayName": "InspectionApi",
+      "ColorIndex": 0
+    }
+  },
+  "NextColorIndex": 1
+}
