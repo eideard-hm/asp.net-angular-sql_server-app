@@ -61,7 +61,8 @@
       <div class="modal-body">
         <app-add-edit-inspection
                                 [inspection]="inspection"
-                                [inspectionTypesList$]="inspectionTypes$">
+                                [inspectionTypesList$]="inspectionTypes$"
+                                *ngIf="activateAddEditInspectionComponent">
         </app-add-edit-inspection>
       </div>
     </div>

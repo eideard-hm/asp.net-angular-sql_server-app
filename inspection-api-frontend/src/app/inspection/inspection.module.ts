@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { InspectionComponent } from './inspection.component';
 import { ShowInspectionComponent } from './show-inspection/show-inspection.component';
 import { AddEditInspectionComponent } from './add-edit-inspection/add-edit-inspection.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -11,7 +12,8 @@ import { AddEditInspectionComponent } from './add-edit-inspection/add-edit-inspe
     AddEditInspectionComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    FormsModule
   ],
   exports: [
     InspectionComponent,
