@@ -15,21 +15,37 @@ export class ShowInspectionComponent implements OnInit {
 
   inspectionTypesMap: Map<number, string> = new Map();
 
+  // properties
+  modalTitle: string = '';
+  activateAddEditInspectionComponent: boolean = false;
+  inspection: any;
+
   constructor(private inspectionService: InspectionService) { }
 
   ngOnInit(): void {
     this.inspections$ = this.inspectionService.getInspectionList();
     this.inspectionTypes$ = this.inspectionService.getInspectionTypesList();
-    this.statuses$ = this.inspectionService.getStatusList();
 
     this.refreshInspectionTypesMap();
   }
 
-  refreshInspectionTypesMap(){
+  refreshInspectionTypesMap() {
     this.inspectionService.getInspectionTypesList()
-    .subscribe(data => {
-      data.forEach((item: any) => this.inspectionTypesMap.set(item.id, item.inspectionName))
-    })
+      .subscribe(data => {
+        data.forEach((item: any) => this.inspectionTypesMap.set(item.id, item.inspectionName))
+      })
+  }
+
+  modalAdd() {
+    this.inspection = {
+      id: 0,
+      status: null,
+      comments: null,
+      inspectionTypeId: null,
+    }
+
+    this.modalTitle = 'Add Inspection';
+    this.activateAddEditInspectionComponent = true;
   }
 
 }

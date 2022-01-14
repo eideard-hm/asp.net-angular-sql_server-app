@@ -1,5 +1,14 @@
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-secondary float-end mb-2" data-bs-toggle="modal" data-bs-target="#exampleModal">
+<!-- Button Add Inspection Types -->
+<button type="button"
+        class="btn btn-primary float-end mb-2 me-2"
+        data-bs-toggle="modal"
+        data-bs-target="#staticBackdrop"
+        (click)="modalAdd()">
+  Add Inspection Types
+ </button>
+
+<!-- Button show Inspection Types-->
+<button type="button" class="btn btn-secondary float-end mb-2 me-2" data-bs-toggle="modal" data-bs-target="#exampleModal">
   Show Inspection Types
 </button>
 
@@ -24,7 +33,7 @@
 </table>
 
 
-<!-- Modal -->
+<!-- Modal show Inspection Types-->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -36,6 +45,24 @@
         <p *ngFor="let type of inspectionTypes$ | async">
           {{ type.id }} - {{ type.inspectionName }}
         </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Add Inspection Types -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">{{ modalTitle }}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <app-add-edit-inspection
+                                [inspection]="inspection"
+                                [inspectionTypesList$]="inspectionTypes$">
+        </app-add-edit-inspection>
       </div>
     </div>
   </div>
