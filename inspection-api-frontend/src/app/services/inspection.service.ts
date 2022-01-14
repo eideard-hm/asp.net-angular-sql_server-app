@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { Inspection } from '../interfaces/Inspection';
 
 const apiUrl = environment.apiUrl;
 
@@ -21,8 +22,8 @@ export class InspectionService {
     return this.http.get(`${apiUrl}/api/Inspections/${id}`);
   }
 
-  addInspection(data: any): Observable<any>{
-    return this.http.post(`${apiUrl}/api/Inspections`, data)
+  addInspection(data: Inspection): Observable<Inspection>{
+    return this.http.post<Inspection>(`${apiUrl}/api/Inspections`, data)
   }
 
   updateInspection(id: number | string, data : any){

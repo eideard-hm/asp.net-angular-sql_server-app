@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { InspectionService } from '../../services/inspection.service';
 import { Observable } from 'rxjs';
+import { Inspection } from '../../interfaces/Inspection';
 
 @Component({
   selector: 'app-show-inspection',
@@ -18,7 +19,7 @@ export class ShowInspectionComponent implements OnInit {
   // properties
   modalTitle: string = '';
   activateAddEditInspectionComponent: boolean = false;
-  inspection: any;
+  inspection!: Inspection;
 
   constructor(private inspectionService: InspectionService) { }
 
@@ -39,13 +40,23 @@ export class ShowInspectionComponent implements OnInit {
   modalAdd() {
     this.inspection = {
       id: 0,
-      status: null,
-      comments: null,
-      inspectionTypeId: null,
+      status: '',
+      comments: '',
+      inspectionTypeId: 0
     }
 
     this.modalTitle = 'Add Inspection';
     this.activateAddEditInspectionComponent = true;
+  }
+
+  closeModal() {
+    this.activateAddEditInspectionComponent = false;
+  }
+
+  refeshTableInspection(isSaveInspection: boolean) {
+    if (isSaveInspection) {
+      this.inspections$ = this.inspectionService.getInspectionList();
+    }
   }
 
 }

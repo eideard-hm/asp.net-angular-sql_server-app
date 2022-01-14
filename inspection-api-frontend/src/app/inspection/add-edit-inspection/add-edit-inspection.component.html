@@ -10,7 +10,7 @@
     <select name="inspectionTypeId"
             id="inspectionTypeId"
             class="form-select"
-            [(ngModel)]="inspectionTypeId"
+            [(ngModel)]="inspection.inspectionTypeId"
             *ngIf="inspection.id === 0">
             <option *ngFor="let type of inspectionTypesList$ | async"
                     [value]="type.id">{{ type.inspectionName }}
@@ -22,11 +22,37 @@
     <label for="status" class="form-label">Status</label>
     <select name="status"
             id="status"
-            class="form-select">
-            <option *ngFor="let status of statuses | async" [value]="status.id">
+            class="form-select"
+            [(ngModel)]="inspection.status">
+            <option *ngFor="let status of statuses | async" [value]="status.statusOption">
               {{ status.statusOption }}
             </option>
     </select>
+  </div>
+
+  <div class="form-group">
+    <label for="comments" class="form-label">Comments</label>
+    <textarea name="comments"
+              id="comments"
+              class="form-control"
+              [(ngModel)]="inspection.comments"
+              >
+    </textarea>
+  </div>
+
+  <div class="form-group mt-2">
+    <button class="btn btn-primary"
+            type="submit"
+            *ngIf="inspection.id === 0"
+            (click)="addInspection()">
+            Save
+    </button>
+    <button class="btn btn-warning"
+            type="submit"
+            *ngIf="inspection.id !== 0"
+            (click)="editInspection()">
+            Edit
+    </button>
   </div>
 
 </form>
