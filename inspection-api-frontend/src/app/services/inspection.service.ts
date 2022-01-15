@@ -14,8 +14,8 @@ export class InspectionService {
   constructor(private http: HttpClient) { }
 
   // requests for the Inspection
-  getInspectionList(): Observable<any[]> {
-    return this.http.get<any[]>(`${apiUrl}/api/Inspections`);
+  getInspectionList(): Observable<Inspection[]> {
+    return this.http.get<Inspection[]>(`${apiUrl}/api/Inspections`);
   }
 
   getOneInspection(id: number | string){
@@ -26,7 +26,7 @@ export class InspectionService {
     return this.http.post<Inspection>(`${apiUrl}/api/Inspections`, data)
   }
 
-  updateInspection(id: number | string, data : any){
+  updateInspection(id: number | string, data : Inspection){
     return this.http.put(`${apiUrl}/api/Inspections/${id}`, data);
   }
 

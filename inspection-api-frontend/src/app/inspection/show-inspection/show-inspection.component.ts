@@ -10,7 +10,7 @@ import { Inspection } from '../../interfaces/Inspection';
 })
 export class ShowInspectionComponent implements OnInit {
 
-  inspections$ !: Observable<any[]>;
+  inspections$ !: Observable<Inspection[]>;
   inspectionTypes$ !: Observable<any[]>;
   statuses$ !: Observable<any[]>;
 
@@ -51,6 +51,37 @@ export class ShowInspectionComponent implements OnInit {
 
   closeModal() {
     this.activateAddEditInspectionComponent = false;
+  }
+
+  editModal(inspection: Inspection){
+    this.inspection = inspection;
+    this.modalTitle= 'Edit Inspection';
+    this.activateAddEditInspectionComponent = true;
+  }
+
+  deleteInspection(id: number){
+    if(confirm(`Are you sure you want delelete inspection: ${id}`)){
+      this.inspectionService.deleteInspection(id)
+      .subscribe({
+        next: () => this.deleteInspectionSuccess('inspection-alert-delete'),
+        error: (err) => console.error(err)
+
+      })
+    }
+  }
+
+  deleteInspectionSuccess(alert: string) {
+
+    this.refeshTableInspection(true);
+    const alertShow: HTMLElement | null = document.querySelector(`#${alert}`);
+
+    if (alertShow) {
+      alertShow.style.display = 'block';
+
+      setTimeout(() => {
+        alertShow.style.display = 'none';
+      }, 4000);
+    }
   }
 
   refeshTableInspection(isSaveInspection: boolean) {

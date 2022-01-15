@@ -26,7 +26,7 @@ export class AddEditInspectionComponent implements OnInit {
   addInspection() {
     this.inspectionService.addInspection(this.inspection)
       .subscribe({
-        next: () => this.inspectionAddSuccess(),
+        next: () => this.inspectionAddSuccess('inspection-alert-success'),
         error: (err) => {
           this.onSaveInspection.emit(false);
           console.error(err);
@@ -34,28 +34,36 @@ export class AddEditInspectionComponent implements OnInit {
       });
   }
 
-  inspectionAddSuccess() {
+  inspectionAddSuccess(alert: string) {
 
     this.onSaveInspection.emit(true);
 
     const closeModal: HTMLButtonElement | null = document.querySelector('#add-edit-modal-close');
-    const alertSuccess: HTMLElement | null = document.querySelector('#inspection-alert-success');
+    const alertShow: HTMLElement | null = document.querySelector(`#${alert}`);
 
     if (closeModal) {
       closeModal.click();
     }
 
-    if (alertSuccess) {
-      alertSuccess.style.display = 'block';
+    if (alertShow) {
+      alertShow.style.display = 'block';
 
       setTimeout(() => {
-        alertSuccess.style.display = 'none';
+        alertShow.style.display = 'none';
       }, 4000);
     }
   }
 
-  editInspection() {
+  editInspection(e: any) {
+    e.preventDefault();
 
+    this.inspectionService.updateInspection(this.inspection.id, this.inspection)
+    .subscribe({
+      next: () => this.inspectionAddSuccess('inspection-alert-update'),
+      error: (err) => {
+        this.onSaveInspection.emit(false);
+        console.error(err)
+      }
+    });
   }
-
 }
